@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>CSS Demo: Linear Gradient</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/digitallytailored/classless@latest/classless.min.css">
+        <link rel="stylesheet" href="./style.css">
+        <script type="importmap">
+            {
+                "imports": {
+                    "vue": "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm-browser.js"
+                }
+            }
+        </script>
+        <script src="./app.min.js" type="module"></script>
+        
+    </head>
+    <body>
+        <div id="app">
+            <layout @change="setCurrent">
+                <component :is="currentComponent" class="component-container"></component>
+            </layout>
+        </div>
+
+
+
+        <template id="layout">
+            <div class="layout">
+                <header class="layout-header">
+                    <nav class="navbar">
+                        <h2>CSS Demo: Linear Gradient</h2>
+                        <div class="navbar-button-container">
+                            <button  @click="$emit('change', 'tutorial')">Tutorial</button>
+                            <button  @click="$emit('change', 'playground')">Playground</button>
+                        </div>
+                    </nav>
+                </header>
+
+                <main class="layout-main">
+                    <slot></slot>
+                </main>
+            </div>
+        </template>
+
+
+
+
+
+        <template id="tutorial">
+            <div class="component-container">
+                <div class="interactable-container">
+                    <h3 style="margin: 0;">Preview</h3>
+                    <section class="preview box" id="box">
+                        <div class="pop-up-display" v-if="popUp != null">
+                            <span v-if="popUp === 'correct'">OMG YOU GOT IT! ✅</span>
+                            <span v-else-if="popUp === 'incorrect'">Give it another try! ❌</span>
+                        </div>
+                    </section>
+                    <section class="user-input">
+                        <pre>
+.box{
+    width:100%;
+    height:100%;
+    background: <input placeholder="Enter linear-gradient here" 
+                        id="user-input" 
+                        v-model="user_input"
+                        @keyup.enter="checkAnswer">;
+}</pre>
+                    </section>
+                    <button @click="checkAnswer">CHECK ANSWER</button>
+                </div>
+                
+                <section class="tutorial-notes">
+                    <div class="info-box">
+                        <h3 style="margin: 0;">Tutorial : Level {{level + 1}}</h3>
+                        <nav class="levels-container">
+                            Levels:
+                            <span v-for="obj, i in levels" class="level-select-container" @click="changeLevel(i)">
+                                <span v-if="levels[i].completed" style="color:green; font-weight: 700;">
+                                    {{i + 1}}
+                                </span>
+                                <span v-else>
+                                    <span v-if="i === level" style="font-weight: 700;">
+                                        {{i + 1}}
+                                    </span>
+                                    <span v-else>
+                                        {{i + 1}}
+                                    </span>
+                                </span>
+                            </span>
+                        </nav>
+                        <h6>Note:</h6>
+                        <p>{{levels[level].tutorial}}</p>
+                        <h6>Syntax:</h6>
+                        <pre>{{levels[level].syntax}}</pre>
+                        <h6>Task:</h6>
+                        <p>{{levels[level].task}}</p>
+                    </div>
+                    <div class="button-box">
+                        <button @click="setLevel(level - 1)">Previous</button>
+                        <button @click="setLevel(level + 1)">Next</button>
+                    </div>
+                </section>
+                
+            </div>
+        </template>
+
+
+
+
+
+
+        <template id="playground">
+            <div class="component-container">
+                <div class="pg-canvas-container">
+                    <h3 style="margin: 0;">Playground</h3>
+                    <section class="pg-canvas" :style="{background: getGradientString()}">    
+                    </section>
+                </div>
+
+                <section class="pg-menu">
+                    <h3 style="margin: 0;">Menu</h3>
+                    <section>
+                        <details>
+                            <summary><h6 style="margin: 0; display:inline;">CSS CODE</h6></summary>
+                            <pre>
+.box{
+    background:{{getGradientString()}}
+} 
+</pre>
+                        </details>
+                    </section>
+
+
+
+
+                    <section>
+                        <details>
+                            <summary><h6 style="margin: 0; display:inline;">Gradient Direction</h6></summary>
+                            <span>
+                                <label class="radio-label"><input type="radio" v-model="dir_mode" name="dir_mode" value="default">Direction</label> 
+                                <label  class="radio-label"><input type="radio" v-model="dir_mode" name="dir_mode" value="degree">Degree</label>
+                            </span>
+
+
+                            <div v-if="dir_mode === 'degree'">
+                                <span class="dir-container">
+                                    0 deg
+                                    <input type="range" placeholder="Enter a number" v-model=degree min="0" max="360">
+                                    360 deg
+                                </span>
+                            </div>
+                            <div v-else class="dir-container">
+                                <div class="direction-grid">
+                                    <label><input type="radio" name="dir" value="top left" v-model="dir1"> ↖</label>
+                                    <label><input type="radio" name="dir" value="top" v-model="dir1"> ↑</label>
+                                    <label><input type="radio" name="dir" value="top right" v-model="dir1"> ↗</label>
+
+                                    <label><input type="radio" name="dir" value="left" v-model="dir1"> ←</label>
+                                    <div class="center"></div>
+                                    <label><input type="radio" name="dir" value="right" v-model="dir1"> →</label>
+
+                                    <label><input type="radio" name="dir" value="bottom left" v-model="dir1"> ↙</label>
+                                    <label><input type="radio" name="dir" value="bottom" v-model="dir1"> ↓</label>
+                                    <label><input type="radio" name="dir" value="bottom right" v-model="dir1"> ↘</label>
+                                </div>
+                            </div>
+                        </details>
+                    </section>
+
+
+                    <section>
+                        <h6 style="margin: 0;margin-bottom:1vh;">Colors</h6>
+                        <ul class="color-list">
+                            <li v-for="color_obj, i in colors">
+                                <details>
+                                    <summary><span> Color {{i + 1}} <div class="color-cube" :style="{backgroundColor:color_obj.hex}"></div></span></summary>
+                                        <span><label>Color:</label><input type="color" v-model="color_obj.hex"></span>
+                                        <span><label>Hex Code:</label><input type="text" 
+                                                                            v-model="color_obj.hex" 
+                                                                            pattern="^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$"
+                                                                            placeholder="#RRGGBB"
+                                                                            required></span>
+                                        <span><label>Gradient Start:</label><input type="range" v-model="color_obj.stop1" min="0" max="100"></span>
+                                        <span><label>Gradient End</label><input type="range" v-model="color_obj.stop2" min="0" max="100"></span>
+                                        <span>
+                                            <button @click="addColor(i)">+Before</button>
+                                            <button @click="addColor(i+1)">+After</button>
+                                            <button @click="deleteColor(i)">DELETE</button>
+                                        </span>
+                                    <hr>
+                                </details>
+                            </li>
+                        </ul>
+                        <button @click="addColor(colors.length)">Add New Color</button>
+                    </section>
+                    
+                </section>
+            </div>
+        </template>
+    </body>
+</html>
