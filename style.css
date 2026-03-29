@@ -1,0 +1,237 @@
+*{
+    box-sizing: border-box !important;
+    width:100%;
+    margin:0;
+}
+
+body{
+    padding: 0;
+}
+
+section{
+    margin-bottom: 0;
+}
+
+.layout{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.layout-header{
+    width:100%;
+}
+
+.navbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h2{
+    display: inline-block;
+}
+
+.navbar-button-container{
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    gap: 10px;
+}
+.navbar-button-container button{
+    width: 50%;
+}
+
+
+
+/* tutorial */
+
+.component-container{
+    display: flex;
+    justify-content: center;
+    gap: 1vw;
+}
+.interactable-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+    gap:1vh;
+}
+
+.preview{
+    height:40vh;
+    background: linear-gradient(white, gray);
+}
+
+.user-input{
+    height:25vh;
+}
+
+.user-input input{
+    width: 70%
+}
+
+.tutorial-notes{
+    flex: 1;
+    height: 81vh ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.levels-container{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.level-select-container:hover{
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.tutorial-notes pre {
+  width: 20vw;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.button-box{
+    display: flex;
+    gap:1vw;
+}
+
+.pop-up-display{
+    position: relative;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    width: 20vw;
+    height: 10vh;
+    border: 5px lightgray solid;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    transform: translate(-10vw, -5vh);
+}
+
+
+.pg-canvas{
+    width: 70vh;
+    height: 70vh;
+}
+
+.pg-canvas-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    flex:3
+}
+.pg-menu{
+    flex: 2;
+    height: 81vh;
+    max-height: 81vh;
+    overflow-y: auto;
+}
+
+
+
+
+.pg-menu input{
+    display: inline;
+}
+
+.pg-menu span{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.color-list{
+    list-style: none;
+    padding: 0 1vw;
+}
+    
+.color-list summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-cube{
+    width: 2vh;
+    height: 2vh;
+    display: inline;
+    border:1px gray solid
+}
+
+.radio-label{
+    display: flex;
+    align-items: center;
+}
+
+.radio-label input[type='radio']{
+    width: 2vh;
+    height: 2vh;
+    margin-right:1vh;
+}
+
+.dir-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dir-container input[type="range"]{
+    width: 10vw
+}
+
+
+
+.direction-grid{
+  display:grid;
+  grid-template-columns:repeat(3,60px);
+  grid-template-rows:repeat(3,60px);
+  gap:6px;
+  width: max-content;
+}
+
+
+.direction-grid input{
+  display:none;
+}
+
+.direction-grid label{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+  border:1px solid #888;
+  border-radius:8px;
+  cursor:pointer;
+  user-select:none;
+}
+
+
+.direction-grid label:hover{
+  background:#f3f3f3;
+}
+
+
+.direction-grid label:has(input:checked){
+  outline:3px black solid;
+}
+
+.center{
+  background:#eee;
+  border-radius:8px;
+}
+
+input:invalid {
+  border: 2px solid red;
+  background: #ffe6e6;
+}
